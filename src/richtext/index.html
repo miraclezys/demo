@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>可拖拽的富文本</title>
+	<script type="text/javascript" src="./static/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="./static/wangEditor.min.js"></script>
+    <script type="text/javascript" src="./static/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="./static/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="./static/jquery-ui.min.css"/>
+    <link rel="stylesheet" href="./index.css"/>
+</head>
+
+<body>
+    <div>
+        <div id="card">
+            <div id="editor" style="left: 230px; top: 200px">
+                <p>我说 你是人间的四月天</p>
+                <p>笑响点亮了四面风</p>
+                <p>轻灵在春的光艳中交舞着变</p>
+                <p>你是四月早天里的云烟</p>
+                <p>黄昏吹着风的软</p>
+                <p>星子在无意中闪</p>
+                <p>你是人间的四月天</p>
+            </div>
+        </div>
+    
+        <button id="btnPreview">生成图片</button>
+        <img id="previewImg" />
+    </div>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+            var E = window.wangEditor;
+            var editor = new E('#editor');
+            editor.customConfig.menus = [
+                'bold',  // 粗体
+                'fontSize',  // 字号
+                'fontName',  // 字体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'foreColor',  // 文字颜色
+                'justify',  // 对齐方式
+            ];
+
+            editor.create();
+            $('#editor').append(`<div class="tool">
+                <span class="move"></span>
+                <embed class="move-svg" src="./static/move.svg"/>
+                <embed class="resize" src="./static/resize.svg" style="float: right" />
+            </div>`);
+        
+			$("#editor").draggable({ handle: '.move', containment: "#card" });
+            $("#editor").resizable({ containment: "#card" });
+
+			$("#btnPreview").click(function () {
+				$(".w-e-text-container").css('border', 'none');
+				$('.tool').hide();
+				$('.w-e-toolbar').css('visibility', 'hidden');
+
+				html2canvas($("#card"), {
+					allowTaint: false,
+                    taintTest : false,
+					logging: true,
+					onrendered: function (canvas) {
+						var dataUrl = canvas.toDataURL();
+                        $("#previewImg").attr('src', dataUrl)
+                        $(".w-e-text-container").css('border', '1px solid #ccc');
+						$('.tool').show();
+                        $('.w-e-toolbar').css('visibility', 'visible');
+					}
+				});
+			});		
+		});
+	</script>
+</body>
+</html>

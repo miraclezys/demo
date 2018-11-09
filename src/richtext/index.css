@@ -1,0 +1,84 @@
+#editor {
+    position: absolute;
+    width: 500px;
+    padding-bottom: 25px;
+}
+#editor p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+.w-e-text-container {
+    z-index: inherit!important;
+    height: calc(100% - 32px)!important;
+}
+.w-e-toolbar {
+    min-width: 260px;
+}
+.w-e-text {
+    padding:  0;
+    border: 1px solid transparent!important;
+    overflow: hidden;
+}
+#editor:hover .w-e-text {
+    overflow-y: auto;
+}
+#editor-wrap {
+    background: transparent!important;
+}
+.ui-widget-content {
+    background: transparent;
+}
+embed {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+.resize {
+    width: 25px;
+    height: 25px;
+}
+.tool {
+    bottom: 0;
+    width: 100%;
+    position: absolute;  
+    background: #f1f1f1;
+}
+.move {
+    width: 25px;
+    height: 30px;
+    position: absolute;  
+    cursor: move;
+    z-index: 2;
+}
+.move-svg {
+    position: absolute;
+    top: 2px;
+}
+#card {
+    width: 840px;
+    height: 640px;
+    margin: 50px;
+    background-image: url('./static/pic.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.ui-resizable-s {
+    bottom: 0;
+}
+.ui-icon {
+    background: none;
+}
+.html2canvas-container { 
+    width: 450px !important; 
+    height: 800px !important; 
+}
+button {
+    margin: 50px;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+img {
+    padding: 50px;
+}
